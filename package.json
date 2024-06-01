@@ -1,0 +1,54 @@
+{
+  "name": "nomore4shop",
+  "version": "1.0.0",
+  "types": "./src/@types/express.d.ts",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./dist/main.js",
+    "build": "tsc --noEmit",
+    "test": "ts-node ./test/mock/register.ts",
+    "dev": "nodemon src/main.ts",
+    "prisma:pull": "npx prisma db pull",
+    "prisma:push": "npx prisma db push",
+    "prisma:gen": "npx prisma generate",
+    "prisma:format": "npx prisma format",
+    "prisma:migrate": "npx prisma migrate deploy",
+    "prisma:migrate:dev": "npx prisma migrate dev",
+    "prisma:seed": "npx prisma db seed",
+    "prisma:dev-migrate": "npx prisma migrate dev --message 'npm run'"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/body-parser": "^1.19.5",
+    "@types/express": "^4.17.21",
+    "@types/module-alias": "^2.0.4",
+    "@types/node-telegram-bot-api": "^0.64.2",
+    "nodemon": "^3.0.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.8.1",
+    "aws-sdk": "^2.1554.0",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "dotenv": "^16.3.2",
+    "express": "^4.18.2",
+    "express-fileupload": "^1.4.3",
+    "inversify": "^6.0.2",
+    "inversify-express-utils": "^6.4.6",
+    "inversify-socket-utils": "^1.0.1004",
+    "module-alias": "^2.2.3",
+    "node-telegram-bot-api": "^0.63.0",
+    "reflect-metadata": "^0.2.1",
+    "socket.io": "^4.7.4",
+    "uuid": "^9.0.1",
+    "winston": "^3.11.0"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "description": ""
+}

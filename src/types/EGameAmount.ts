@@ -1,0 +1,1 @@
+export type EGameAmount = 25 | 100 | 250 | 500

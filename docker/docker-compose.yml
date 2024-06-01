@@ -1,0 +1,11 @@
+version: '3.3'
+
+services:
+  database:
+    image: 'postgres:latest'
+    restart: always
+    container_name: 4PEOPLE
+    environment:
+      POSTGRES_PASSWORD: secret
+    ports:
+      - "5432:5432"

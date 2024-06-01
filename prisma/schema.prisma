@@ -1,0 +1,100 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum RoomStatus {
+	waiting
+	ingame
+	played
+}
+
+model Cell {
+
+	id Int @id @default(autoincrement())
+
+	isBomb Boolean
+	
+	amount Float
+
+	index Int
+
+	isOpen Boolean @default(false)
+
+	room Room? @relation(fields: [roomId], references: [id], name: "room_cell")
+	roomId Int
+
+	createdAt DateTime @default(now())
+	updatedAt DateTime @updatedAt
+
+
+}
+
+model WinAmount {
+
+	id Int @id @default(autoincrement())
+
+	user User @relation(fields: [userId], references: [id], name: "user_winamount")
+	userId Int
+
+	amount Float @default(0)
+
+	room Room @relation(fields: [roomId], references: [id], name: "room_winamount")
+	roomId Int
+
+	createdAt DateTime @default(now())
+	updatedAt DateTime @updatedAt
+
+}
+
+model User {
+
+	id Int @id @default(autoincrement())
+
+	balance Float @default(0)
+
+	winAmounts WinAmount[] @relation(name: "user_winamount")
+
+	username String
+
+	room Room? @relation(fields: [roomId], references: [id], name: "user_room")
+	roomId Int?
+
+	chatId BigInt @unique
+
+	createdAt DateTime @default(now())
+	updatedAt DateTime @updatedAt
+
+}
+
+model Room {
+
+	id Int @id @default(autoincrement())
+
+	members User[] @relation(name: "user_room")
+
+	amount Float
+
+	status RoomStatus @default(waiting)
+
+	winAmounts WinAmount[] @relation(name: "room_winamount")
+
+	stepQueue Int[]
+	queue Int @default(0)
+
+	cells Cell[] @relation(name: "room_cell")
+
+	createdAt DateTime @default(now())
+	updatedAt DateTime @updatedAt
+
+}
